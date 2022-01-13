@@ -5,6 +5,7 @@ import Price from './Price';
 import Chart from './Chart';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchCoinTickers } from './api';
+import {Helmet} from 'react-helmet';
 
 const Container = styled.div`
   padding:0px 20px;
@@ -74,6 +75,24 @@ const Tab = styled.span<{ isActive : boolean }>`
     display: block;
   }
 `;
+
+const Btn = styled.button`
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border-radius: 10px;
+  border-color: white;
+  color: ${props=>props.theme.textColor};
+  font-size: 15px;
+  padding: 5px 5px;
+  margin-top:15px;
+  display: flex;
+  flex-direction: row-reverse;
+  span{
+    font-size:13px;
+  }
+`;
+
+
 
 
 interface Params {
@@ -147,7 +166,10 @@ export default function Coin() {
   
 
   const { isLoading:infoLoading,data:infoData } = 
-  useQuery<InfoData>(["info",coinId], ()=>fetchCoinInfo(coinId))
+  useQuery<InfoData>(["info",coinId], ()=>fetchCoinInfo(coinId),
+  {
+    refetchInterval:5000,
+  })
   
   const { isLoading:tickersLoading,data:tickersData } = 
   useQuery<PriceData>(["tickers",coinId], ()=>fetchCoinTickers(coinId))
@@ -155,6 +177,11 @@ export default function Coin() {
   const loading = infoLoading || tickersLoading ;
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</Title>
       </Header>
@@ -164,22 +191,22 @@ export default function Coin() {
       <>
         <Overview>
           <OverviewItem>
-            <span>Rank:</span>
+            <span>순위:</span>
             <span>{infoData?.rank}</span>
           </OverviewItem>
           <OverviewItem>
-            <span>Symbol:</span>
+            <span>심볼(Symbol):</span>
             <span>${infoData?.symbol}</span>
           </OverviewItem>
           <OverviewItem>
-            <span>Open Source:</span>
-            <span>{infoData?.open_source ? "Yes" : "No"}</span>
+            <span>가격:</span>
+            <span>{`${tickersData?.quotes.USD.price.toFixed(2)}$`}</span>
           </OverviewItem>
         </Overview>
         <Description>{infoData?.description}</Description>
         <Overview>
           <OverviewItem>
-            <span>Total Suply:</span>
+            <span>Total Supply:</span>
             <span>{tickersData?.total_supply}</span>
           </OverviewItem>
           <OverviewItem>
@@ -190,19 +217,25 @@ export default function Coin() {
 
         <Tabs>
           <Tab isActive={chartMatch !== null}>
-            <Link to={`/${coinId}/chart`}>Chart</Link>
+            <Link to={`/${coinId}/chart`}>차트</Link>
           </Tab>
           <Tab isActive={priceMatch !== null}>
-            <Link to={`/${coinId}/price`}>Price</Link>
+            <Link to={`/${coinId}/price`}>가격</Link>
           </Tab>
+          <Link to={'/'}>
+           <Btn><span>목록으로</span></Btn>
+          </Link>
         </Tabs>
+
+
+
 
         <Switch>
           <Route path={`/:coinId/price`}>
             <Price/>
           </Route>
           <Route path={`/:coinId/chart`}>
-            <Chart/>
+            <Chart coinId={coinId}/>
           </Route>
         </Switch>
       </>
