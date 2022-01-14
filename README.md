@@ -4,6 +4,7 @@ Demo : https://trusting-lalande-7e6cf1.netlify.app/#/
 
 content : 
          (1)프로젝트하면서 문제점과 배워나간점
+         
          1.github page에 배포시 404오류가 많이 발생했다. react-router-dom의 사용때문에 사람들도 오류가 많이 발생한다던데
          따른 배포한 페이지는 잘되고 어떠한 페이지는 배포가 안되어서 cointracker 페이지는 netify에 배포하였다.
          
