@@ -9,7 +9,7 @@ import { BsSun,BsMoonStarsFill } from "react-icons/bs";
 
 const Container = styled.div`
   padding:0px 20px;
-  max-width: 550px;
+  max-width: 520px;
   margin:0 auto;
 `;
 
@@ -23,6 +23,7 @@ const Header = styled.header`
 const Title = styled.h1`
   color:${props => props.theme.textColor};
   font-size:48px;
+  transition: .3s ease-in;
 `;
 
 const CoinsList = styled.ul`
@@ -46,7 +47,7 @@ const Coin = styled.li`
     display:flex;
     align-items: center;
     padding:15px;
-    transition: color 0.2s ease-in;
+    transition: color 0.3s ease-in;
   }
   &:hover{
     a{
@@ -101,7 +102,7 @@ export default function Coins() {
     <Container>
       <Helmet>
       <title>
-        코인
+        Coin Tracker
       </title>
       </Helmet>
       <Header>

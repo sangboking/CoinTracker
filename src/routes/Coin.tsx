@@ -25,6 +25,7 @@ const Header = styled.header`
 const Title = styled.h1`
   color:${props => props.theme.textColor};
   font-size:48px;
+  transition: .3s ease-in;
 `;
 
 const Loader = styled.span`
@@ -38,6 +39,7 @@ const Overview = styled.div`
   background-color:${props=>props.theme.coinbgColor};
   padding: 10px 20px;
   border-radius: 10px;
+  transition: .3s ease-in;
 `;
 
 const OverviewItem = styled.div`
@@ -73,6 +75,7 @@ const Tab = styled.span<{ isActive : boolean }>`
   border-radius: 10px;
   color: ${(props) =>
     props.isActive ? props.theme.accentColor : props.theme.textColor};
+  transition: .3s ease-in;
   a {
     display: block;
   }
