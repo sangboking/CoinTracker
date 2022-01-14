@@ -5,6 +5,9 @@ import Chart from './Chart';
 import { useQuery } from 'react-query';
 import { fetchCoinInfo, fetchCoinTickers } from './api';
 import {Helmet} from 'react-helmet';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { isDarkAtom } from '../atoms';
+import { BsSun,BsMoonStarsFill } from "react-icons/bs";
 
 const Container = styled.div`
   padding:0px 20px;
@@ -20,7 +23,7 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  color:${props => props.theme.accentColor};
+  color:${props => props.theme.textColor};
   font-size:48px;
 `;
 
@@ -32,7 +35,7 @@ const Loader = styled.span`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color:${props=>props.theme.coinbgColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -65,7 +68,7 @@ const Tab = styled.span<{ isActive : boolean }>`
   text-transform: uppercase;
   font-size: 12px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props=>props.theme.coinbgColor};
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
@@ -76,7 +79,7 @@ const Tab = styled.span<{ isActive : boolean }>`
 `;
 
 const Btn = styled.button`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${props=>props.theme.coinbgColor};
   cursor: pointer;
   border-radius: 10px;
   border-color: white;
@@ -88,6 +91,15 @@ const Btn = styled.button`
   flex-direction: row-reverse;
   span{
     font-size:13px;
+  }
+`;
+
+const Toggle = styled.div`
+  cursor: pointer;
+  margin-left: 1rem;
+  margin-top: .5rem;
+  svg{
+    font-size:1.5rem;
   }
 `;
 
@@ -157,11 +169,16 @@ interface PriceData{
   };
 }
 
+
+
 export default function Coin() {
   const {coinId}:Params = useParams();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
   const {state} = useLocation<RouteState>();
+  const isDark = useRecoilValue(isDarkAtom);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = ()=> setDarkAtom(current=>!current)
   
 
   const { isLoading:infoLoading,data:infoData } = 
@@ -183,6 +200,7 @@ export default function Coin() {
       </Helmet>
       <Header>
         <Title>{state?.name ? state.name : loading ? "Loading..." : infoData?.name}</Title>
+        <Toggle onClick={toggleDarkAtom}>{isDark?<BsSun/>:<BsMoonStarsFill/>}</Toggle>
       </Header>
       {loading 
       ? <Loader>Loading...</Loader>
@@ -234,7 +252,7 @@ export default function Coin() {
             <Price coinId={coinId}/>
           </Route>
           <Route path={`/:coinId/chart`}>
-            <Chart coinId={coinId}/>
+            <Chart coinId={coinId} />
           </Route>
         </Switch>
       </>

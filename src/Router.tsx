@@ -4,15 +4,16 @@ import Coins from "./routes/Coins";
 
 
 
+
 function Router(){
     return (
       <HashRouter>
         <Switch>
           <Route path="/:coinId">
-              <Coin />
+            <Coin />
           </Route>
           <Route path="/">
-              <Coins />
+            <Coins/>
           </Route>
         </Switch>
       </HashRouter>

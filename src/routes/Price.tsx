@@ -112,19 +112,19 @@ export default function Price({coinId}:{coinId:string}) {
           <Tag>
             <Title>1시간 가격변동 :</Title>
             <TagItem>
-              <span>{data?.quotes.USD.percent_change_1h}</span>
+              <span>{data?.quotes.USD.percent_change_1h}%</span>
             </TagItem>
           </Tag>
           <Tag>
             <Title>6시간 가격변동 :</Title>
             <TagItem>
-              <span>{data?.quotes.USD.percent_change_6h}</span>
+              <span>{data?.quotes.USD.percent_change_6h}%</span>
             </TagItem>
           </Tag>
           <Tag>
             <Title>24시간 가격변동 :</Title>
             <TagItem>
-              <span>{data?.quotes.USD.percent_change_24h}</span>
+              <span>{data?.quotes.USD.percent_change_24h}%</span>
             </TagItem>
           </Tag>
           <span>*달러환율 기준입니다.</span>
