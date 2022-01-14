@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {ThemeProvider} from 'styled-components';
 import { theme } from './theme'
-import { Query, QueryClient,QueryClientProvider } from 'react-query';
+import { QueryClient,QueryClientProvider } from 'react-query';
 
 const queryClient = new QueryClient();
 
