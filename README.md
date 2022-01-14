@@ -2,9 +2,8 @@
 
 Demo : https://trusting-lalande-7e6cf1.netlify.app/#/
 
-content : 
-         (1)프로젝트하면서 문제점과 배워나간점
-         
+프로젝트하면서 문제점과 배워나간점 : 
+
          1.github page에 배포시 404오류가 많이 발생했다. react-router-dom의 사용때문에 사람들도 오류가 많이 발생한다던데
          따른 배포한 페이지는 잘되고 어떠한 페이지는 배포가 안되어서 cointracker 페이지는 netify에 배포하였다.
          
@@ -23,7 +22,8 @@ content :
          API 데이터를 필요로한다면 refetchInterval 이란 기능으로 지정해놓은 시간마다 데이터를 refetching 할수 있어서 coin 가격등의 변화를
          얻을수 있어서 좋았다. React Query 라이브러리는 정말 많이 사용하게 될거같다.
          
-         (2)cointracker 사이트 소개
+
+cointracker 사이트 소개
          이 사이트는 coinpaprika 라는 사이트에서 API를 만들어 제작하였다. 코인들의 정보들이 담긴 API 였다.
          첫 홈화면에서는 100가지의 코인들이 나열된다. API 받은 데이터들을 map함수를 통해 반복하여 출력하였다.
          각각의 코인에 react-router-dom으로 상세페이지를 만들었다. 상세페이지를 가면 각 코인들의 정보와 차트,가격을 볼수있다.
@@ -32,4 +32,4 @@ content :
          
         
 
-skill : Typescript, React, styled-component
+skill : Typescript, React, styled-component, recoil
